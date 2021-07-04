@@ -90,14 +90,16 @@ As a developer I hate having to figure out how to work with someone else's plugi
 
 
 
-## Example this Readme.md without the code samples.
+## Example 
 ```
+---
+name: Arachne
+description: Markdown Powered Knowledge Base API
+created: July 2021
+---
 
 # What is Arachne?
 > Arachne, (Greek: “Spider”) in [[greek/mythology]], the [[Arachne:daughter of:Idmon of Colophon]] in Lydia, a dyer in purple. Arachne was a weaver who acquired such skill in her art that she ventured to challenge Athena, goddess of war, handicraft, and practical reason.
-
-Arachne is a simple application written in Go that traverses a directory and parses markdown files looking for the following syntax:
-
 ```
 
 ```
