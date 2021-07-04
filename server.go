@@ -73,6 +73,6 @@ func StartServer(port string, root string) {
 	mux.HandleFunc("/graph", graphEndpoint)
 
 	log.Println("Starting server on :" + port)
-	err := http.ListenAndServe(":" + port, mux)
+	err := http.ListenAndServe(":"+port, mux)
 	log.Fatal(err)
 }

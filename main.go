@@ -11,10 +11,8 @@ type Config struct {
 	Root string `toml:"root"`
 }
 
-
 var domain Graph
 var GraphState = NewGraphSubject(domain)
-
 
 func main() {
 	graphChan := make(chan Graph) // uwu senpai~
@@ -24,7 +22,6 @@ func main() {
 	if _, err := toml.DecodeFile("./config.toml", &conf); err != nil {
 		log.Fatal("Could not decode config file, make sure it exists and that it defines a port and root directory.")
 	}
-
 
 	go StartGraphStructureService(conf.Root, graphChan)
 	go StartServer(conf.Port, conf.Root)

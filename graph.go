@@ -35,8 +35,8 @@ type Graph struct {
 	Edges      []Edge                 `json:"edges"`
 	Keys       map[string]bool        `json:"-"`
 	Properties map[string]interface{} `json:"properties"`
-	Content map[string]string `json:"content"`
-	Base string `json:"base"`
+	Content    map[string]string      `json:"content"`
+	Base       string                 `json:"base"`
 }
 
 func NewGraph() Graph {
@@ -45,13 +45,13 @@ func NewGraph() Graph {
 		Nodes:      []Node{},
 		Properties: map[string]interface{}{},
 		Edges:      []Edge{},
-		Content: map[string]string{},
+		Content:    map[string]string{},
 	}
 }
 
 func (g *Graph) AddNode(nodes ...Node) {
 	newNodes := []Node{}
-	
+
 	for _, node := range nodes {
 		exists := g.Keys[node.Name]
 		if !exists {
@@ -88,7 +88,7 @@ type FileEntry struct {
 	FileName  string `json:"fileName"`
 	Directory string `json:"directory"`
 	UpdatedAt int64  `json:"updatedAt"`
-	Root string `json:"root"`
+	Root      string `json:"root"`
 }
 
 func hasRelationshipString(text string) bool {
@@ -252,7 +252,7 @@ func (f *FileEntry) normalizedName() string {
 	return f.normalizedPathRoot(p)
 }
 
-func (f *FileEntry) normalizedPathRoot(fileName string) string {	
+func (f *FileEntry) normalizedPathRoot(fileName string) string {
 	return path.Join(strings.Replace(fileName, ".md", "", 1))
 }
 
@@ -271,8 +271,8 @@ func DeriveGraphStructure(entries []FileEntry, output chan Graph, rootFolder str
 		if err != nil {
 			log.Fatal(err)
 		}
-	g.Content[entry.normalizedName()] = string(content)
-	g.Base = rootFolder
+		g.Content[entry.normalizedName()] = string(content)
+		g.Base = rootFolder
 	}
 	output <- g
 }
@@ -305,7 +305,7 @@ func StartGraphStructureService(rootFolder string, output chan Graph) {
 				entries = append(entries, FileEntry{
 					FileName:  d.Name(),
 					Path:      path,
-					Root: rootFolder,
+					Root:      rootFolder,
 					Directory: filepath.Dir(path),
 					UpdatedAt: info.ModTime().Unix(),
 				})
@@ -322,7 +322,7 @@ func StartGraphStructureService(rootFolder string, output chan Graph) {
 				tracker[entry.Path] = entry.UpdatedAt
 			}
 		}
-		
+
 		if dirty {
 			DeriveGraphStructure(entries, output, rootFolder)
 		}
